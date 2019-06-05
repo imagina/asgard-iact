@@ -59,11 +59,6 @@ class ActController extends AdminBaseController
     {
         $users =  $this->user->all();
         $participants = $this->participant_id->all();
-      /*  $filter=json_decode(json_encode(['country_id'=>48]));
-        $provinces = $this->province->index(null,null,$filter,[],[]);
-*/
-
-
         return view('iact::admin.acts.create', compact('users','participants','cities','provinces'));
     }
 
@@ -99,11 +94,8 @@ class ActController extends AdminBaseController
     {
         $users =  $this->user->all();
         $participants = $this->participant->all();
-       /* $filter=json_decode(json_encode(['country_id'=>48]));
-        $provinces = $this->province->index(null,null,$filter,[],[]);
-        $filter_city = json_decode(json_encode(['province_id'=>$act->province_id]));
-        $cities=$this->city->index(null,null,$filter_city,[],[]);
-*/
+
+
         return view('iact::admin.acts.edit', compact('act','users','participants','provinces','cities'));
     }
 

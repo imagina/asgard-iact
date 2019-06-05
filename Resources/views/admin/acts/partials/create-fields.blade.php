@@ -31,7 +31,18 @@
             </div>
         </div>
     </div>
+
 </div>
+    <div class='form-group{{ $errors->has("{$lang}.activities") ? ' has-error' : '' }}'>
+        {!! Form::label("{$lang}[activities]", trans('iact::acts.form.activities')) !!}
+        {!! Form::text("{$lang}[activities]", old("{$lang}.activities"), ['class' => 'form-control', 'data-slug' => 'source', 'placeholder' => trans('iact::acts.form.activities')]) !!}
+        {!! $errors->first("{$lang}.activities", '<span class="help-block">:message</span>') !!}
+    </div>
+    <div class='form-group{{ $errors->has("{$lang}.people") ? ' has-error' : '' }}'>
+        {!! Form::label("{$lang}[people]", trans('iact::acts.form.people')) !!}
+        {!! Form::text("{$lang}[people]", old("{$lang}.people"), ['class' => 'form-control', 'data-slug' => 'source', 'placeholder' => trans('iact::acts.form.people')]) !!}
+        {!! $errors->first("{$lang}.people", '<span class="help-block">:message</span>') !!}
+    </div>
     <?php if (config('asgard.page.config.partials.translatable.create') !== []): ?>
     <?php foreach (config('asgard.page.config.partials.translatable.create') as $partial): ?>
     @include($partial)

@@ -15,7 +15,7 @@ class CreateIactParticipantsTable extends Migration
         Schema::create('iact__participants', function (Blueprint $table) {
             $table->engine = 'InnoDB';
             $table->increments('id');
-            // Your fields
+            $table->integer('user_id');
             $table->timestamps();
         });
     }

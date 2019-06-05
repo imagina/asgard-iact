@@ -41,7 +41,7 @@ class RegisterIactSidebar implements \Maatwebsite\Sidebar\SidebarExtender
                 $item->icon('fa fa-folder-open-o');
                 $item->weight(10);
                 $item->authorize(
-                     /* append */
+                    $this->auth->hasAccess('iact.acts.index')
                 );
                 $item->item(trans('iact::acts.title.acts'), function (Item $item) {
                     $item->icon('fa fa-file-text-o');
@@ -52,17 +52,6 @@ class RegisterIactSidebar implements \Maatwebsite\Sidebar\SidebarExtender
                         $this->auth->hasAccess('iact.acts.index')
                     );
                 });
-                $item->item(trans('iact::participants.title.participants'), function (Item $item) {
-                    $item->icon('fa fa-users');
-                    $item->weight(0);
-                    $item->append('admin.iact.participants.create');
-                    $item->route('admin.iact.participants.index');
-                    $item->authorize(
-                        $this->auth->hasAccess('iact.participants.index')
-                    );
-                });
-// append
-
 
             });
         });

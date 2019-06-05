@@ -1,9 +1,10 @@
 <?php
 
+use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateIactParticipantsTranslationsTable extends Migration
+class CreateIactActParticipantTable extends Migration
 {
     /**
      * Run the migrations.
@@ -12,13 +13,12 @@ class CreateIactParticipantsTranslationsTable extends Migration
      */
     public function up()
     {
-        Schema::create('iact__participants_translations', function (Blueprint $table) {
-            $table->engine = 'InnoDB';
+        Schema::create('iact__act_participant', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('name');
+            $table->integer('act_id')->unsigned();
             $table->integer('participants_id')->unsigned();
-            $table->string('locale')->index();
-            $table->unique(['participants_id', 'locale']);
+            $table->timestamps();
+            $table->foreign('act_id')->references('id')->on('iact__acts')->onDelete('cascade');
             $table->foreign('participants_id')->references('id')->on('iact__participants')->onDelete('cascade');
         });
     }
@@ -30,9 +30,10 @@ class CreateIactParticipantsTranslationsTable extends Migration
      */
     public function down()
     {
-        Schema::table('iact__participants_translations', function (Blueprint $table) {
+        Schema::table('iact__act_participant', function (Blueprint $table) {
+            $table->dropForeign(['act_id']);
             $table->dropForeign(['participants_id']);
         });
-        Schema::dropIfExists('iact__participants_translations');
+        Schema::dropIfExists('iact__act_participant');
     }
 }

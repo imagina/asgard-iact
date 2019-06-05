@@ -10,11 +10,15 @@ class ActTranslation extends Model
     protected $fillable = ['title', 'activities', 'description'];
     protected $table = 'iact__act_translations';
 
+    protected $casts = [
+        'activities'=>'array',
+    ];
 
-
-    protected function setDescriptionAttribute($value){
-
-        $this->attributes['description'] = $value;
+    public function getActivitiesAttribute($value){
+        if(isset($value)&&!empty($value)){
+            return json_decode($value);
+        }
+        return null;
     }
 
 }

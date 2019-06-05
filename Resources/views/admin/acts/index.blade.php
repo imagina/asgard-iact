@@ -41,12 +41,12 @@
                             <tr>
                                 <td>
                                     <a href="{{ route('admin.iact.act.edit', [$act->id]) }}">
-                                        {{ $place->id }}
+                                        {{ $act->id }}
                                     </a>
                                 </td>
                                 <td>
                                     <a href="{{ route('admin.iact.act.edit', [$act->id]) }}">
-                                        {{ $place->title }}
+                                        {{ $act->title }}
                                     </a>
                                 </td>
                                 <td>

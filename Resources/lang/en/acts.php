@@ -24,7 +24,9 @@ return [
         'title'=>'Subject',
         'address'=>'Place',
         'email'=>'Email',
-        'phone'=>'Phone'
+        'phone'=>'Phone',
+        'activities'=>'Activities',
+        'people'=>'People'
     ],
     'messages' => [
     ],

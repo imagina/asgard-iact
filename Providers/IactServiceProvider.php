@@ -39,6 +39,8 @@ class IactServiceProvider extends ServiceProvider
 
     public function boot()
     {
+        $this->publishConfig('iact', 'config');
+        $this->publishConfig('iact', 'settings');
         $this->publishConfig('iact', 'permissions');
 
         $this->loadMigrationsFrom(__DIR__ . '/../Database/Migrations');

@@ -1,7 +1,7 @@
 {
     "name": "Iact",
     "alias": "iact",
-    "description": "",
+    "description": "Module of business minutes for the registration of meetings and events ",
     "keywords": [],
     "version": "1.0.0",
 	"active": 1,

@@ -13,4 +13,19 @@ class CacheActDecorator extends BaseCacheDecorator implements ActRepository
         $this->entityName = 'iact.acts';
         $this->repository = $act;
     }
+
+    public function getItemsBy($params)
+    {
+        return $this->remember(function () use ($params) {
+            return $this->repository->getItemsBy($params);
+        });
+    }
+
+    public function getItem($criteria, $params)
+    {
+        return $this->remember(function () use ($criteria, $params) {
+            return $this->repository->getItem($criteria, $params);
+        });
+    }
+
 }

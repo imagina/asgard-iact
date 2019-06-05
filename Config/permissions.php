@@ -6,6 +6,7 @@ return [
         'create' => 'iact::acts.create resource',
         'edit' => 'iact::acts.edit resource',
         'destroy' => 'iact::acts.destroy resource',
+        'all' => 'iact::acts.list all resource'
     ],
     'iact.participants' => [
         'index' => 'iact::participants.list resource',

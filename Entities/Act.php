@@ -4,27 +4,38 @@ namespace Modules\Iact\Entities;
 
 use Dimsav\Translatable\Translatable;
 use Illuminate\Database\Eloquent\Model;
+use Laracasts\Presenter\PresentableTrait;
+use Modules\Core\Traits\NamespacedEntity;
 
 class Act extends Model
 {
-    use Translatable;
+    use Translatable, PresentableTrait, NamespacedEntity;
 
     protected $table = 'iact__acts';
     public $translatedAttributes = ['title', 'activities', 'description'];
-    protected $fillable = ['title', 'activities', 'description', 'options', 'city_id', 'address', 'user_id','email','phone'];
+    protected $fillable = ['title', 'activities', 'description', 'options', 'city_id', 'address', 'user_id','address','phone'];
     protected $fakeColumns = ['options'];
     protected $casts = [
         'options' => 'array',
-
-
+        'address'=>'array',
+        'activities'=>'array',
     ];
-
+    protected static $entityNamespace = 'asgardcms/act';
 
     public function user()
     {
         $driver = config('asgard.user.config.driver');
         return $this->belongsTo("Modules\\User\\Entities\\{$driver}\\User");
     }
+
+    public function city(){
+        return $this->belongsTo("Modules\Ilocations\Entities\City");
+    }
+
+    public function participants(){
+        return $this->belongsToMany(Participants::class,'iact__act_participant');
+    }
+
     public function getMainimageAttribute(){
 
         $image=$this->options->mainimage ?? 'modules/iact/img/default.jpg';
@@ -42,8 +53,37 @@ class Act extends Model
         return url(str_replace('.jpg','_smallThumb.jpg',$this->options->mainimage?? 'modules/iact/img/default.jpg'));
     }
 
-    public function participant()
-    {
-        return $this->belongsTo(Participants::class, 'participant_id');
+
+    public function getOptionsAttribute($value){
+        return json_decode($value);
     }
+
+    public function getAddressAttribute($value){
+        if (isset($value)&& !empty($value)){
+            return json_decode($value);
+        }
+    }
+
+    /**
+     * Magic Method modification to allow dynamic relations to other entities.
+     * @var $value
+     * @var $destination_path
+     * @return string
+     */
+    public function __call($method, $parameters)
+    {
+        #i: Convert array to dot notation
+        $config = implode('.', ['asgard.iblog.config.relations', $method]);
+
+        #i: Relation method resolver
+        if (config()->has($config)) {
+            $function = config()->get($config);
+
+            return $function($this);
+        }
+
+        #i: No relation found, return the call to parent (Eloquent) to handle it.
+        return parent::__call($method, $parameters);
+    }
+
 }
