@@ -3,7 +3,7 @@
     "alias": "iact",
     "description": "Module of business minutes for the registration of meetings and events ",
     "keywords": [],
-    "version": "1.0.0",
+    "version": "1.0.1",
 	"active": 1,
     "order": 1,
     "providers": [

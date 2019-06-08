@@ -21,6 +21,8 @@ class ActTransformer extends Resource
             'user' => new UserProfileTransformer($this->whenLoaded('user')),
             'participants' => ParticipantTransformer::collection($this->whenLoaded('participants')),
             'city' => new CityTransformer($this->whenLoaded('city')),
+            'created_at'=>$this->when($this->created_at, $this->created_at),
+            'url'=>$this->when($this->url, $this->url)
         ];
 
         $filter = json_decode($request->filter);

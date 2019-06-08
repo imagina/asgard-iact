@@ -13,7 +13,7 @@ class Act extends Model
 
     protected $table = 'iact__acts';
     public $translatedAttributes = ['title', 'activities', 'description'];
-    protected $fillable = ['title', 'activities', 'description', 'options', 'city_id', 'address', 'user_id','address','phone'];
+    protected $fillable = ['title', 'activities', 'description', 'options', 'city_id', 'address', 'email','user_id','address','phone','created_at'];
     protected $fakeColumns = ['options'];
     protected $casts = [
         'options' => 'array',
@@ -62,6 +62,13 @@ class Act extends Model
         if (isset($value)&& !empty($value)){
             return json_decode($value);
         }
+    }
+
+    public function getUrlAttribute() {
+
+
+        return \URL::route('iacts.act.pdf', [$this->id]);
+
     }
 
     /**

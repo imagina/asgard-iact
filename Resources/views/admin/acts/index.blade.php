@@ -31,6 +31,7 @@
                             <tr>
                                 <th>{{ trans('iact::acts.table.id') }}</th>
                                 <th>{{ trans('iact::acts.table.title') }}</th>
+                                <th>Usuario</th>
                                 <th>{{ trans('core::core.table.created at') }}</th>
                                 <th data-sortable="false">{{ trans('core::core.table.actions') }}</th>
                             </tr>
@@ -47,6 +48,11 @@
                                 <td>
                                     <a href="{{ route('admin.iact.act.edit', [$act->id]) }}">
                                         {{ $act->title }}
+                                    </a>
+                                </td>
+                                <td>
+                                    <a href="{{ route('admin.iact.act.edit', [$act->id]) }}">
+                                        {{$act->user->present()->fullName}}
                                     </a>
                                 </td>
                                 <td>

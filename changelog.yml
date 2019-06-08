@@ -1,5 +1,12 @@
 url: https://github.com/imagina/iact.git
 versions:
+  "1.0.1":
+    added:
+      - Routes frontend
+      - PublicCpntroller
+      - View PDF Act
+    changed:
+      - name composer to imagina/iact-module
   "1.0.0":
     added:
       - Inital Version Act Module

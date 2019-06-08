@@ -47,6 +47,7 @@ class ActApiController extends BaseApiController
             //If request pagination add meta-page
             $params->page ? $response["meta"] = ["page" => $this->pageTransformer($dataEntity)] : false;
         } catch (\Exception $e) {
+            \Log::error($e);
             $status = $this->getStatusError($e->getCode());
             $response = ["errors" => $e->getMessage()];
         }
@@ -81,6 +82,7 @@ class ActApiController extends BaseApiController
             //If request pagination add meta-page
             $params->page ? $response["meta"] = ["page" => $this->pageTransformer($dataEntity)] : false;
         } catch (\Exception $e) {
+            \Log::error($e);
             $status = $this->getStatusError($e->getCode());
             $response = ["errors" => $e->getMessage()];
         }
@@ -111,6 +113,7 @@ class ActApiController extends BaseApiController
             $response = ["data" => new ActTransformer($dataEntity)];
             \DB::commit(); //Commit to Data Base
         } catch (\Exception $e) {
+            \Log::error($e);
             \DB::rollback();//Rollback to Data Base
             $status = $this->getStatusError($e->getCode());
             $response = ["errors" => $e->getMessage()];
@@ -150,6 +153,7 @@ class ActApiController extends BaseApiController
             $response = ["data" => 'Item Updated'];
             \DB::commit();//Commit to DataBase
         } catch (\Exception $e) {
+            \Log::error($e);
             \DB::rollback();//Rollback to Data Base
             $status = $this->getStatusError($e->getCode());
             $response = ["errors" => $e->getMessage()];
@@ -183,6 +187,7 @@ class ActApiController extends BaseApiController
             $response = ["data" => "Item deleted"];
             \DB::commit();//Commit to Data Base
         } catch (\Exception $e) {
+            \Log::error($e);
             \DB::rollback();//Rollback to Data Base
             $status = $this->getStatusError($e->getCode());
             $response = ["errors" => $e->getMessage()];
